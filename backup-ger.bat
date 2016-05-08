@@ -690,7 +690,6 @@ rem ###########################################################################
   call :separator >> "%notes_txt%"
   echo  %time:~0,-3% - Textfile fr freie Notizen angelegt.
   echo.
-  start notepad.exe "%notes_txt%"
 
   rem Batch-Datei in das Log-Verzeichnis kopieren
   copy backup.bat "%dest_path%\log\backup.bak" > NUL
@@ -700,17 +699,6 @@ rem ###########################################################################
   echo.
 
   set file_size=
-
-  rem Problemdatei l”schen oder ”ffnen
-  if exist "%problem_txt%" (
-    call :get_filesize "%problem_txt%" file_size
-    if !file_size!==0 (
-      del "%problem_txt%"
-    ) else (
-      start notepad.exe "%problem_txt%"
-    )
-  )
-
   call :get_filesize "%verify_txt%" file_size
 
   rem Wenn verify.txt 0 Bytes groá ist, sind keine Unterschiede gefunden worden,
@@ -729,7 +717,9 @@ rem ###########################################################################
 
       rem Pfade zu Text-Dateien umbiegen
       call set log_txt=%%log_txt:%dest_dir%=!prev_dir!%%
+      call set notes_txt=%%notes_txt:%dest_dir%=!prev_dir!%%
       call set deleted_txt=%%deleted_txt:%dest_dir%=!prev_dir!%%
+      call set problem_txt=%%problem_txt:%dest_dir%=!prev_dir!%%
 
       echo    "%dest_path%" umbenannt in "!prev_dir!". >> "!log_txt!"
       echo. >> "!log_txt!"
@@ -750,7 +740,6 @@ rem ###########################################################################
       )
     )
     echo  Die Datensicherung war erfolgreich.
-    echo.
   ) else (
     color 0C
     echo    FEHLER: Original und Sicherung unterscheiden sich. >> "%log_txt%"
@@ -769,7 +758,19 @@ rem ###########################################################################
     echo.
     pause
   )
+
+  rem Problemdatei l”schen oder ”ffnen
+  if exist "%problem_txt%" (
+    call :get_filesize "%problem_txt%" file_size
+    if !file_size!==0 (
+      del "%problem_txt%"
+    ) else (
+      start notepad.exe "%problem_txt%"
+    )
+  )
   
+  start notepad.exe "%notes_txt%"
+
   goto end
 
 rem ###########################################################################
