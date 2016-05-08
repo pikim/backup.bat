@@ -1,6 +1,6 @@
 #backup.bat
 
-##A backup script using Windows 7 onboard tools only
+##A Windows 7 backup script using onboard tools only
 The script supports differential backups, full backups and single backups. It supports multiple backup jobs on NTFS volumes.
 
 ###Differential Backup
@@ -19,22 +19,22 @@ Only modified files are copied. For unmodified files a hardlink is created. But 
 - backup-overview-original.pdf - The original flowchart from Mark
 
 ##Usage
-**backup.bat /n bu_name c:\users** (passing _/diff_ as parameter is optional)
+**backup.bat /n bu_name c:\users** (passing **/diff** as parameter is optional)  
 Creates a new job: differential backup of "c:\users" with name "bu_name".
 
-**backup.bat /n bu_name c:\users /full**
+**backup.bat /n bu_name c:\users /full**  
 Creates a new job: full backup of "c:\users" with name "bu_name".
 
-**backup.bat /n bu_name c:\users /single**
+**backup.bat /n bu_name c:\users /single**  
 Creates a new job: single backup of "c:\users" with name "bu_name".
 
-**backup.bat /b bu_name**
+**backup.bat /b bu_name**  
 Backs up the current state of "c:\users".
 
-**backup.bat /?**
+**backup.bat /?**  
 Show the available commands.
 
 ##Misc
 The script has not been extensively tested, yet. So please be careful at the beginning and double check the result.
 
-###Thanks to Mark Neugebauer (info@raketenphysik.de) for the good starting point.
+#####Thanks to Mark Neugebauer (info@raketenphysik.de) for the good starting point.
